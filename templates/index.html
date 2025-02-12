@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Match your photo with clothes from our store!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap" rel="stylesheet">
+  <style>
+    /* Reset some basic styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Delius Swash Caps", serif;
+      background-color: #E8E9ED;
+    }
+    /* Container centers content vertically and horizontally */
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    /* Style for the upload box */
+    .upload-box {
+      background: #18011D;
+      color: #AB7EB4;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 8px 10px rgba(160, 111, 157, 0.6);
+      text-align: center;
+      width: 45%;
+      transform: translateY(-10%);
+    }
+    /* Increase the gap below the title */
+    .upload-box h1 {
+      margin-bottom: 30px;
+    }
+    /* Style for the logo image */
+    .logo {
+      width: 320px;  /* Increased the size of the logo */
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+    /* Style for file input */
+    input[type="file"] {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Style for the submit button */
+    input[type="submit"] {
+      background-color: #CEFF1C;
+      color: #000000;
+      border: none;
+      padding: 10px 25px;
+      font-family: "Delius Swash Caps", serif;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #85a31b;
+    }
+    /* Responsive adjustment for smaller screens */
+    @media (max-width: 768px) {
+      .upload-box {
+         width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="upload-box">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="logo">
+      <h1>Match your photo with clothes from our store!</h1>
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <input type="submit" value="Search">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

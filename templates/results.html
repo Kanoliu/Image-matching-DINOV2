@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Product Search Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and body styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Delius Swash Caps", serif;
+      background-color: #E8E9ED;
+    }
+    /* Main container centers content */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    /* Box style for main sections (mimicking the upload box style) */
+    .result-box {
+      background: #18011D;
+      color: #AB7EB4;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 8px 10px rgba(160, 111, 157, 0.6);
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+    /* Flex container for product cards */
+    .results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    /* Individual product card styling */
+    .result-item {
+      background: #fff;
+      color: #000;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 5px rgba(160, 111, 157, 0.6);
+      width: 220px;
+      text-align: center;
+    }
+    /* Product image styling with fixed dimensions and stretch (6:9 ratio) */
+    .product-img {
+      width: 200px;
+      height: 280px;
+      object-fit: fill;  /* Stretches the image to fill the container */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Price styling */
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    /* Button styling (for product card and bottom button) */
+    .btn {
+      background-color: #CEFF1C;
+      color: #000;
+      padding: 10px 25px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background-color: #85a31b;
+    }
+    /* Style the icon inside the button (won't be stretched) */
+    .btn img {
+      width: 38px;
+      vertical-align: middle;
+      border: none; /* Eliminates any border around the icon */
+    }
+    /* Styling for the uploaded/searched product image */
+    .uploaded-img {
+      max-width: 300px;
+      border: none;
+      margin-bottom: 20px;
+    }
+    /* Headings styling */
+    h1, h2 {
+      margin: 0 0 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 26px;
+      font-family: "Delius Swash Caps", serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Display the searched product -->
+    <div class="result-box">
+      <h2>Your Searched Product</h2>
+      <img class="uploaded-img" src="data:image/jpeg;base64,{{ test_img }}" alt="Searched Product">
+    </div>
+
+    <!-- Display similar products as product cards -->
+    <div class="result-box">
+      <h2>Similar Products</h2>
+      <div class="results">
+        {% for path, price in results %}
+        <div class="result-item">
+          <img class="product-img" src="{{ url_for('static', filename=path) }}" alt="Product">
+          <p class="price">£{{ price }}</p>
+          <button class="btn" onclick="alert('Added to cart!')" aria-label="Add to Cart">
+            <img src="{{ url_for('static', filename='images/cart-icon.png') }}" alt="Cart Icon">
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Button to return to the search page -->
+    <a href="{{ url_for('index') }}" class="btn">Search Another Product</a>
+  </div>
+</body>
+</html>
